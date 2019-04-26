@@ -16,5 +16,4 @@ install:
 script:
   - pep8 --show-source app/
   - docker-compose build
-  - docker-compose run app sh -c python manage.py test
-  - travis_wait 100 script.sh
+  - travis_wait 120 docker-compose run app sh -c python manage.py test
