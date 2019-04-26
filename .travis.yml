@@ -1,0 +1,19 @@
+language: python
+python:
+  - "3.6"
+services:
+  - docker
+
+env:
+  COMPOSE_VERSION: 18.09.2
+before_script:
+    - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+    - pip freeze > requirements.txt
+    - pip install -r requirements.txt
+    - pip install django==1.11
+install:
+    - pip install pep8
+script:
+  - pep8 --show-source app/
+  - docker-compose build
+- docker-compose run app sh -c python manage.py test

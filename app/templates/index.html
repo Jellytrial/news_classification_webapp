@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>
+    Please enter news url:
+</p>
+
+
+<form action = "" method="get">
+    <input type="text" size="35" name="url">
+    <input type="submit" value="Submit">
+</form>
+
+{% if url %}
+url: {{ url|urlize }}
+{% else %}
+{% if url == None %}
+not get url
+{% endif %}
+{% endif %}
+<br>
+{% if category == None %}
+{% else %}
+{% if category == False %}
+Cannot classify category.
+
+{% else %}
+Category is supposed to be : {{category}}
+{% endif %}
+{% endif %}
+
+{% endblock %}
