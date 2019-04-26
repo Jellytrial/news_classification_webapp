@@ -62,7 +62,8 @@ def gunosy_category(extraction):
                 try:
                     title = page_extract.\
                             find_all('div',
-                                     {'class': 'list_title'})[index].a.get_text()
+                                     {'class': 'list_\
+                                     title'})[index].a.get_text()
                     article_text = page_extract.\
                         find_all('div',
                                  {'class': 'list_lead'})[index].get_text()
