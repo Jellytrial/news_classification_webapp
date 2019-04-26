@@ -16,4 +16,4 @@ install:
 script:
   - pep8 --show-source app/
   - docker-compose build
-- docker-compose run app sh -c python manage.py test
+  - docker-compose run app sh -c python manage.py test
