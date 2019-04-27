@@ -47,8 +47,7 @@ def gunosy_category(extraction):
             for page_url in category_page_url:
                 try:
                     page_html = request.urlopen(page_url)
-                except URLError as E:
-                    # print('Page not found', E)
+                except URLError:
                     continue
 
                 try:
