@@ -1,11 +1,17 @@
 import math
 import sys
 from collections import defaultdict
+import morpholog
+
+
+def getwords(doc):
+    words = [s.lower() for s in morpholog.split(doc)]
+    return tuple(w for w in words)
 
 
 class NaiveBayes:
 
-    def __init__(self, data):
+    def __init__(self):
         self.categories = set()
         self.vocabularies = set()
         self.wordcount = {}         # wordcount[cat][word]
@@ -33,33 +39,44 @@ class NaiveBayes:
             self.denominator[cat] = sum(
                 self.wordcount[cat].values()) + len(self.vocabularies)
 
-    def classify(self, doc):
+    def classifier(self, doc):
+        best = None  # best category
+        maximum = -sys.maxsize
+        word = getwords(doc)
 
-        best = None
-        max = -sys.maxsize
+        # Calculate logarithm of probability for each category
         for cat in self.catcount.keys():
-            p = self.score(doc, cat)
-            if p > max:
-                max = p
+            # print(cat)
+            prob = self.score(word, cat)
+            # print(prob)
+            if prob > maximum:
+                maximum = prob
                 best = cat
         return best
 
-    def wordProb(self, word, cat):
+    # occurrence probability of category
+    def priorprob(self, cate):
+        return float(self.catcount[cate] / sum(self.catcount.values()))
 
-        return float(self.wordcount[cat][word] + 1) / \
-               float(self.denominator[cat])
+    def score(self, word, cat):
+        score = math.log(self.priorprob(cat))
+        for w in word:
+            score += math.log(self.wordprob(w, cat))
 
-    def score(self, doc, cat):
-        total = sum(self.catcount.values())
-        score = math.log(float(self.catcount[cat]) / total)
-
-        for wc in doc:
-            word, count = wc.split(":")
-            count = int(count)
-
-            for i in range(count):
-                score += math.log(self.wordProb(word, cat))
         return score
+
+    # number of a word appears in a certain category
+    def incategory(self, word, cat):
+        if word in self.wordcount[cat]:
+            return float(self.wordcount[cat][word])
+        return 0.0
+
+    # Conditional probability P(word|cate)
+    def wordprob(self, word, cat):
+        prob = (self.incategory(word, cat) + 1.0) / \
+               (sum(self.wordcount[cat].values()) +
+                len(self.vocabularies) * 1.0)
+        return prob
 
     def __str__(self):
         total = sum(self.catcount.values())

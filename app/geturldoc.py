@@ -14,7 +14,7 @@ def get_news_text(url):
         return None
 
     try:
-        soup = BeautifulSoup(html.read())
+        soup = BeautifulSoup(html.read(), 'lxml')
     except AttributeError:
         return None
 

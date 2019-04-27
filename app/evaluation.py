@@ -2,6 +2,7 @@ import codecs
 import sys
 import math
 from naivebayes import NaiveBayes
+from sklearn.externals import joblib
 
 
 number = []
@@ -30,6 +31,10 @@ def crossValidation(data, N=num, randomize=False):
         # train data
         nb = NaiveBayes(100)
         nb.train(trainData)
+
+        # save trained model
+        joblib.dump(nb, 'trained_nb.m')
+
         # accuracy of test data
         hit = 0
         numTest = 0
