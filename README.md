@@ -10,7 +10,8 @@
 Automaticlly PEP8 check by travi-ci
 
 ## Training data
-3200 news articles from 8 categories (エンタメ,スポーツ,おもしろ,国内,海外,コラム,IT・科学,グルメ) of Gunosy news web site `https://gunosy.com/`.
+3200 news articles from 8 categories (エンタメ,スポーツ,おもしろ,国内,海外,コラム,IT・科学,グルメ) of Gunosy news web site `https://gunosy.com/`.  
+Get training data and save model: `$docker-compose run app python train_model.py`.
 
 ## Web app usage
 #### 1. Clone news_classification_webapp from Github
@@ -31,11 +32,11 @@ After launching, please input following URL in browser:
 `http://127.0.0.1:8000/`  
 Then input news article URL of Gunosy, it will return the category. 
 
-#### 6. Evaluate model and save model
+#### 6. Evaluate model
 `$docker-compose run app python evaluation.py`
 
 ## Model evaluation
-All classifiers are evaluated with cross validation score.  
+All classifiers are evaluated with cross validation score in [other models](https://github.com/Jellytrial/news_classification_webapp/blob/master/app/other_models.ipynb).  
 #### 1. Comparison of different classifiers
 Following models are evaluated with 3200 data size.  
 
