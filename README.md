@@ -9,7 +9,10 @@
 ## Code Style Convention
 Automaticlly PEP8 check by travi-ci
 
-## Operation method
+## Training data
+3200 news articles from 8 categories (エンタメ,スポーツ,おもしろ,国内,海外,コラム,IT・科学,グルメ) of Gunosy news web site `https://gunosy.com/`.
+
+## Web app usage
 #### 1. Clone news_classification_webapp from Github
 `$git clone https://github.com/Jellytrial/news_classification_webapp.git`
 
@@ -22,14 +25,13 @@ In oder to build contianer, make sure you have installed docker.
 
 #### 4. Run web app
 `$docker-compose up`  
-Data will be trained when web app is launching, please wait patiently.
 
 #### 5. Enter into web app
 After launching, please input following URL in browser:  
 `http://127.0.0.1:8000/`  
 Then input news article URL of Gunosy, it will return the category. 
 
-#### 6. Evaluate model
+#### 6. Evaluate model and save model
 `$docker-compose run app python evaluation.py`
 
 ## Model evaluation
