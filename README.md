@@ -48,7 +48,7 @@ Following models are evaluated with 3200 data size.
 |K-Neighbors|0.8469|
 |Linear SVC|0.9335|
 
-#### 2. Works on increasing accuracy
+#### 2. Works on improving accuracy
 a. Increase data size from 800 to 3200，and accuracy grows from 0.7989 to 0.9434.  
 b. Increase training data from words of article title to words both in title and article content.  
 c. Transform news contents to category-word frequency form by words count.   
