@@ -12,7 +12,7 @@ for line in f:
     number.append(line.split()[0])
 f.close()
 num = len(number)
-print(num)
+# print(num)
 
 
 def crossValidation(data, N=num, randomize=False):

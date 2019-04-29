@@ -6,7 +6,7 @@ import csv
 import time
 
 
-def gunosy_category(extraction):
+def gunosy_category():
     categories = {
         'https://gunosy.com/categories/1': 'エンタメ',
         'https://gunosy.com/categories/2': 'スポーツ',
@@ -47,7 +47,8 @@ def gunosy_category(extraction):
             for page_url in category_page_url:
                 try:
                     page_html = request.urlopen(page_url)
-                except URLError:
+                except URLError as E:
+                    # print('Page not found', E)
                     continue
 
                 try:
@@ -59,13 +60,9 @@ def gunosy_category(extraction):
 
             for index in range(0, 20):
                 try:
-                    title = page_extract.\
-                            find_all('div',
-                                     {'class': 'list_\
-                                     title'})[index].a.get_text()
-                    article_text = page_extract.\
-                        find_all('div',
-                                 {'class': 'list_lead'})[index].get_text()
+                    title = page_extract.find_all('div',
+                                                  {'class': 'list_title'})[index].a.get_text()
+                    article_text = page_extract.find_all('div', {'class': 'list_lead'})[index].get_text()
                     sum_text = title+article_text
                     listdata1, listdata2 = [], []
                     listdata1.append(title)
@@ -80,5 +77,9 @@ def gunosy_category(extraction):
                 print('No.%s, extraction.train(%s, %s)' % (page_numb, sum_text,
                                                            name))
                 page_numb = page_numb + 1
-                extraction.train(sum_text, name)
+                # extraction.train(sum_text, name)
                 time.sleep(1)
+
+if __name__ == "__main__":
+    # get articles
+    gunosy_category()
