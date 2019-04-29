@@ -9,9 +9,13 @@
 ## Code Style Convention
 Automaticlly PEP8 check by travi-ci
 
-## Training data
-3200 news articles from 8 categories (エンタメ,スポーツ,おもしろ,国内,海外,コラム,IT・科学,グルメ) of Gunosy news web site `https://gunosy.com/`.  
-Get training data and save model: `$docker-compose run app python train_model.py`.
+## Collection of training data and model training
+a. 3200 news articles (8 categories × 20 pages × 20 articles) from 8 categories (エンタメ,スポーツ,おもしろ,国内,海外,コラム,IT・科学,グルメ) of Gunosy news web site `https://gunosy.com/` in [Get articles](https://github.com/Jellytrial/news_classification_webapp/blob/master/app/traindata.py).  
+`$docker-compose run app python traindata.py`   
+b. Data have to be transformed to the form for training at first in [trans_data](https://github.com/Jellytrial/news_classification_webapp/blob/master/app/trans_data.py).  
+`$docker-compose run app python trans_data.py`  
+c. Then model is trained in [train_model](https://github.com/Jellytrial/news_classification_webapp/blob/master/app/train_model.py) and saved.  
+`$docker-compose run app python train_model.py`  
 
 ## Web app usage
 #### 1. Clone news_classification_webapp from Github
