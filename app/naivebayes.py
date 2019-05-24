@@ -42,12 +42,12 @@ class NaiveBayes:
     def classifier(self, doc):
         best = None  # best category
         maximum = -sys.maxsize
-        word = getwords(doc)
+        # word = getwords(doc)
 
         # Calculate logarithm of probability for each category
         for cat in self.catcount.keys():
             # print(cat)
-            prob = self.score(word, cat)
+            prob = self.score(doc, cat)
             # print(prob)
             if prob > maximum:
                 maximum = prob
@@ -55,13 +55,16 @@ class NaiveBayes:
         return best
 
     # occurrence probability of category
-    def priorprob(self, cate):
-        return float(self.catcount[cate] / sum(self.catcount.values()))
+    def priorprob(self, cat):
+        return float(self.catcount[cat] / sum(self.catcount.values()))
 
-    def score(self, word, cat):
+    def score(self, doc, cat):
         score = math.log(self.priorprob(cat))
-        for w in word:
-            score += math.log(self.wordprob(w, cat))
+        for wc in doc:
+            word, count = wc.split(":")
+            count = int(count)
+            for i in range(count):
+                score += math.log(self.wordprob(word, cat))
 
         return score
 
@@ -74,8 +77,7 @@ class NaiveBayes:
     # Conditional probability P(word|cate)
     def wordprob(self, word, cat):
         prob = (self.incategory(word, cat) + 1.0) / \
-               (sum(self.wordcount[cat].values()) +
-                len(self.vocabularies) * 1.0)
+            self.denominator[cat]
         return prob
 
     def __str__(self):
