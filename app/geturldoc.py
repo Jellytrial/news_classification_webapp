@@ -8,14 +8,17 @@ def get_news_text(url):
         return None
     try:
         html = urllib.request.urlopen(url)
-    except HTTPError:
+    except HTTPError as E:
+        print(E)
         return None
-    except URLError:
+    except URLError as E:
+        print(E)
         return None
 
     try:
         soup = BeautifulSoup(html.read(), 'lxml')
-    except AttributeError:
+    except AttributeError as E:
+        print(E)
         return None
 
     # get text
