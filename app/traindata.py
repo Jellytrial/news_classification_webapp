@@ -61,9 +61,10 @@ def gunosy_category(model):
 
             for index in range(0, 20):
                 try:
-                    title = page_extract.find_all('div',
-                                                  {'class': 'list_title'})[index].a.get_text()
-                    article_text = page_extract.find_all('div', {'class': 'list_lead'})[index].get_text()
+                    title = page_extract.find_all(
+                        'div', {'class': 'list_title'})[index].a.get_text()
+                    article_text = page_extract.find_all(
+                        'div', {'class': 'list_lead'})[index].get_text()
                     sum_text = title + article_text
                     listdata1, listdata2 = [], []
                     listdata1.append(title)
