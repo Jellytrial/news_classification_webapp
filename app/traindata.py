@@ -53,8 +53,8 @@ def gunosy_category(model):
                     continue
 
                 try:
-                    page_extract = BeautifulSoup(page_html.read(),
-                                                 'html.parser')
+                    page_extract = BeautifulSoup(
+                        page_html.read(), 'html.parser')
                 except URLError as E:
                     print(E)
                     continue
