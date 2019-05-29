@@ -42,7 +42,6 @@ class NaiveBayes:
     def classifier(self, doc):
         best = None  # best category
         maximum = -sys.maxsize
-        # word = getwords(doc)
 
         # Calculate logarithm of probability for each category
         for cat in self.catcount.keys():

@@ -57,6 +57,7 @@ if __name__ == "__main__":
         temp = line.split()
         data.append(temp)
     f.close()
+
     # Cross Validation
     average = crossValidation(data, N=num, randomize=True)
     average_f = round(average, 4)

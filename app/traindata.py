@@ -78,6 +78,7 @@ def gunosy_category(model):
                 print('No.%s, extraction.train(%s, %s)' % (page_numb, sum_text,
                                                            name))
                 model.train(sum_text, name)
+
                 page_numb = page_numb + 1
                 time.sleep(1)
 
