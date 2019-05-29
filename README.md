@@ -13,6 +13,7 @@ Automaticlly PEP8 check by travi-ci
 Collect and train model with 3200 news articles (8 categories × 20 pages × 20 articles) from 8 categories (エンタメ,スポーツ,おもしろ,国内,海外,コラム,IT・科学,グルメ) of Gunosy news web site `https://gunosy.com/` in [Get articles](https://github.com/Jellytrial/news_classification_webapp/blob/master/app/traindata.py).  
 `$docker-compose run app python traindata.py`     
 
+
 ## Web app usage
 #### 1. Clone news_classification_webapp from Github
 `$git clone https://github.com/Jellytrial/news_classification_webapp.git`

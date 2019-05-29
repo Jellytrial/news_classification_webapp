@@ -47,6 +47,7 @@ class NaiveBayes:
             if prob > maximum:
                 maximum = prob
                 best = cate
+
         return best
 
     # calculate score
@@ -59,6 +60,7 @@ class NaiveBayes:
 
     # occurrence probability of category
     def priorprob(self, cate):
+
         return float(self.catecount[cate] / sum(self.catecount.values()))
 
     # number of a word appears in a certain category
@@ -83,4 +85,5 @@ class NaiveBayes:
             if pred == cate[i]:
                 acc_count += 1
         value_score = acc_count / total_len
+
         return value_score
