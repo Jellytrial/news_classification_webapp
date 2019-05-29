@@ -2,7 +2,6 @@ import codecs
 import sys
 import math
 from naivebayes import NaiveBayes
-from sklearn.externals import joblib
 
 
 number = []
@@ -12,7 +11,7 @@ for line in f:
     number.append(line.split()[0])
 f.close()
 num = len(number)
-# print(num)
+print(num)
 
 
 def crossValidation(data, N=num, randomize=False):
@@ -27,13 +26,10 @@ def crossValidation(data, N=num, randomize=False):
         # split train and test data
         trainData = [d for i, d in enumerate(data) if i % N != n]
         testData = [d for i, d in enumerate(data) if i % N == n]
-        # print(len(trainData), len(testData))
-        # train data
-        nb = NaiveBayes(100)
-        nb.train(trainData)
 
-        # save trained model
-        joblib.dump(nb, 'trained_nb.m')
+        # train data
+        nb = NaiveBayes()
+        nb.train(trainData)
 
         # accuracy of test data
         hit = 0
@@ -41,7 +37,7 @@ def crossValidation(data, N=num, randomize=False):
         for d in testData:
             correct = d[0]
             words = d[1:]
-            predict = nb.classify(words)
+            predict = nb.classifier(words)
             if correct == predict:
                 hit += 1
             numTest += 1

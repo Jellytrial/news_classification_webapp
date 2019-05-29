@@ -1,6 +1,5 @@
 Django == 1.11
-requests
-beautifulsoup4
-janome
-lxml
-scikit-learn
+requests == 2.18.1
+beautifulsoup4 == 4.7.1
+lxml == 4.3.3
+scikit-learn == 0.21.2
