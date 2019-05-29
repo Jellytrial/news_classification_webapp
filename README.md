@@ -10,12 +10,9 @@
 Automaticlly PEP8 check by travi-ci
 
 ## Collection of training data and model training
-a. 3200 news articles (8 categories × 20 pages × 20 articles) from 8 categories (エンタメ,スポーツ,おもしろ,国内,海外,コラム,IT・科学,グルメ) of Gunosy news web site `https://gunosy.com/` in [Get articles](https://github.com/Jellytrial/news_classification_webapp/blob/master/app/traindata.py).  
-`$docker-compose run app python traindata.py`   
-b. Data have to be transformed to the form for training at first in [trans_data](https://github.com/Jellytrial/news_classification_webapp/blob/master/app/trans_data.py).  
-`$docker-compose run app python trans_data.py`  
-c. Then model is trained in [train_model](https://github.com/Jellytrial/news_classification_webapp/blob/master/app/train_model.py) and saved.  
-`$docker-compose run app python train_model.py`  
+Collect and train model with 3200 news articles (8 categories × 20 pages × 20 articles) from 8 categories (エンタメ,スポーツ,おもしろ,国内,海外,コラム,IT・科学,グルメ) of Gunosy news web site `https://gunosy.com/` in [Get articles](https://github.com/Jellytrial/news_classification_webapp/blob/master/app/traindata.py).  
+`$docker-compose run app python traindata.py`     
+
 
 ## Web app usage
 #### 1. Clone news_classification_webapp from Github
@@ -25,7 +22,7 @@ c. Then model is trained in [train_model](https://github.com/Jellytrial/news_cla
 `$cd news_classification_webapp`
 
 #### 3. Build up docker container
-In oder to build contianer, make sure you have installed docker.  
+In oder to build container, make sure you have installed docker.  
 `$docker-compose build`
 
 #### 4. Run web app
@@ -37,6 +34,9 @@ After launching, please input following URL in browser:
 Then input news article URL of Gunosy, it will return the category. 
 
 #### 6. Evaluate model
+a. Data have to be transformed to the form for evaluation at first in [trans_data](https://github.com/Jellytrial/news_classification_webapp/blob/master/app/trans_data.py).  
+`$docker-compose run app python trans_data.py`  
+b. Then model can be evaluated by command:
 `$docker-compose run app python evaluation.py`
 
 ## Model evaluation
