@@ -1,12 +1,13 @@
 from bs4 import BeautifulSoup
 from urllib import request
-from nbclass import *
+from nbclass import NaiveBayes
+from sklearn.externals import joblib
 from urllib.error import HTTPError, URLError
 import csv
 import time
 
 
-def gunosy_category():
+def gunosy_category(model):
     categories = {
         'https://gunosy.com/categories/1': 'エンタメ',
         'https://gunosy.com/categories/2': 'スポーツ',
@@ -63,11 +64,11 @@ def gunosy_category():
                     title = page_extract.find_all('div',
                                                   {'class': 'list_title'})[index].a.get_text()
                     article_text = page_extract.find_all('div', {'class': 'list_lead'})[index].get_text()
-                    sum_text = title+article_text
+                    sum_text = title + article_text
                     listdata1, listdata2 = [], []
                     listdata1.append(title)
                     listdata2.append(article_text)
-                    contentWriter.writerow(listdata1+listdata2)
+                    contentWriter.writerow(listdata1 + listdata2)
                     listname = []
                     listname.append(name)
                     categoryWriter.writerow(listname)
@@ -76,10 +77,12 @@ def gunosy_category():
 
                 print('No.%s, extraction.train(%s, %s)' % (page_numb, sum_text,
                                                            name))
+                model.train(sum_text, name)
                 page_numb = page_numb + 1
-                # extraction.train(sum_text, name)
                 time.sleep(1)
 
 if __name__ == "__main__":
     # get articles
-    gunosy_category()
+    nb = NaiveBayes()
+    gunosy_category(nb)
+    joblib.dump(nb, 'trained_nb.m')
